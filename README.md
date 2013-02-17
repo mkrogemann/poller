@@ -29,7 +29,7 @@ In its current implementation stage, the gem focuses on systems that are accessi
 
 Please contact me in case you have ideas/feature requests both in terms of http-based systems and extensions for non http-based systems.
 
-Pull requests are welcome!
+Pull requests and bug reports are welcome!
 
 
 
