@@ -9,7 +9,7 @@ class Timeout
 
   # Returns true if timeout period has elapsed, false if not
   def occured?
-    Time.now - @start_time > @period
+    Time.now - @start_time >= @period
   end
 
 end
