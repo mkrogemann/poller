@@ -7,7 +7,29 @@ poller
 
 poller is a Ruby gem that supports testing asynchronous calls to systems under test by exposing Poller implementations.
 
+It is in large parts inspired by the work of Steeve Freeman &amp; Nat Pryce and their excellent GOOS book ("Growing Object Oriented Software Guided By Tests").
 
-This is in large parts inspired by the work of Steeve Freeman &amp; Nat Pryce and theor excellent GOOS book.
+Installation
+------------
+The gem can be installed in the usual ways. Either let bundler take care of it and add to your Gemfile like this:
 
-It does not completely follow the patterns described in the book. Instead, what we are after here is to eventually return a result given it contains certain expected data. Main use case as of today is calling an http resource which should eventually contain the expected data. We can specify the success criterion in a Probe but we also want to return the resulting document once the criterion is met.
+    gem 'poller'
+
+Or install it directly on your command line
+
+    gem install poller
+
+Usage
+-----
+TBD
+
+Scope &amp; Feature Requests
+----------------------------
+In its current implementation stage, the gem focuses on systems that are accessible via http calls.
+
+Please contact me in case you have ideas/feature requests both in terms of http-based systems and extensions for non http-based systems.
+
+Pull requests are welcome!
+
+
+
