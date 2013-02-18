@@ -28,7 +28,7 @@ module Poller
           probe = http_poller.instance_variable_get(:@probe)
           probe_proxy = probe.instance_variable_get(:@proxy)
 
-          puts probe_proxy.proxy_user.should == 'proxy_user'
+          probe_proxy.proxy_user.should == 'proxy_user'
         end
 
       end
