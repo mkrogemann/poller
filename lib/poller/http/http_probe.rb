@@ -1,6 +1,12 @@
 # The HttpProbe class is built on top of the Ruby built-in net/http library.
 # Proxy support is provided. Please note that the Net::HTTP::Proxy will return
 # a Net::HTTP object if no proxy information is given (ie proxy_hostname is nil)
+#
+# The 'sample' method will wrap any Exception it may catch into a RuntimeError.
+#
+# Equally, any HTTP Response other than Net::HTTPSuccess will also get wrapped
+# into a RuntimeError as this class expects a GET request to return 200|OK in
+# its current implementation.
 
 require 'uri'
 require 'net/http'
@@ -20,7 +26,7 @@ module Poller
           http_response = @proxy.get_response(@uri)
           return http_response if http_response.class == Net::HTTPSuccess
         rescue Exception => e
-          raise RuntimeError, "#sample caught an Excpetion of class #{e.class} with message: #{e.message}"
+          raise RuntimeError, "#sample caught an Exception of class #{e.class} with message: #{e.message}"
         end
         raise RuntimeError, "HTTP request failed, the error class is: #{http_response.class}"
       end

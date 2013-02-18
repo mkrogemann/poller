@@ -76,7 +76,7 @@ module Poller
 
           expect {
             http_probe.sample
-          }.to raise_error(RuntimeError, "#sample caught an Excpetion of class Exception with message: some message")
+          }.to raise_error(RuntimeError, "#sample caught an Exception of class Exception with message: some message")
 
         end
 
