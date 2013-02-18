@@ -35,7 +35,7 @@ Design
 ------
 The gem has been developed to run in Ruby 1.9.3 but will also run in Ruby 1.8.7.
 
-One design goal has been to work without external dependencies. Therefore it does not use such beautiful gems such as rest-client. Proxy support has been built on top of the less comfortable net/http API.
+One design goal has been to work without external dependencies. Therefore it does not use such beautiful gems like the fabulous 'rest-client'. Proxy support has been built on top of the less comfortable net/http API.
 
 There is currently no support for authenticated http proxies but building this into the codebase is easy. Please let me know if this is a requirement (see above).
 
