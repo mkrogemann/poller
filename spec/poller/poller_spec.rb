@@ -8,7 +8,7 @@ module Poller
   class PollerModuleHolder
     include Poller
 
-    def initialize(probe, timeout_s, period_s)
+    def initialize(probe, matcher, timeout_s, period_s)
       super
     end
   end
@@ -26,9 +26,9 @@ module Poller
         Kernel.should_not_receive(:sleep)
         probe.should_receive(:satisfied?).once.and_return(true)
 
-        # we set timeout_s and period_s to nil as they are out of this example's scope. no need
+        # we set matcher, timeout_s and period_s to nil as they are out of this example's scope. no need
         # to use the timeout mock here as it will not get called because first poll already succeeds
-        PollerModuleHolder.new(probe, nil, nil).check
+        PollerModuleHolder.new(probe, nil, nil, nil).check
       end
 
 
@@ -40,8 +40,8 @@ module Poller
         Kernel.should_receive(:sleep).twice
         probe.should_receive(:satisfied?).exactly(3).times
 
-        # we set timeout_s to nil as it is out of this example's scope (and because we mock it)
-        poller = PollerModuleHolder.new(probe, nil, 0.0001)
+        # we set matcher and timeout_s to nil as it is out of this example's scope (and because we mock it)
+        poller = PollerModuleHolder.new(probe, nil, nil, 0.0001)
         poller.instance_variable_set(:@timeout, timeout)
 
         poller.check
@@ -56,8 +56,8 @@ module Poller
         Kernel.should_receive(:sleep).once
         probe.should_receive(:satisfied?).exactly(:twice)
 
-        # we set timeout_s to nil as it is out of this example's scope (and because we mock it)
-        poller = PollerModuleHolder.new(probe, nil, 0.0001)
+        # we set matcher and timeout_s to nil as it is out of this example's scope (and because we mock it)
+        poller = PollerModuleHolder.new(probe, nil, nil, 0.0001)
         poller.instance_variable_set(:@timeout, timeout)
 
         expect {

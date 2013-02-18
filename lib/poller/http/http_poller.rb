@@ -12,9 +12,11 @@ module Poller
     class HttpPoller
       include Poller
 
-      def initialize(url, timeout_s, period_s, proxy = nil)
-        probe = proxy.nil? ? HttpProbe.new(url) : HttpProbe.new(url, proxy.hostname, proxy.port, proxy.user, proxy.password)
-        super(probe, timeout_s, period_s)
+      def initialize(url, matcher, timeout_s, period_s, proxy = nil)
+        probe = proxy.nil? \
+          ? HttpProbe.new(url, matcher) \
+          : HttpProbe.new(url, matcher, proxy.hostname, proxy.port, proxy.user, proxy.password)
+        super(probe, matcher, timeout_s, period_s)
       end
 
     end

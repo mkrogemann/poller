@@ -7,6 +7,9 @@
 # Equally, any HTTP Response other than Net::HTTPSuccess will also get wrapped
 # into a RuntimeError as this class expects a GET request to return 200|OK in
 # its current implementation.
+#
+# HttpProbe also expects a matcher to be passed in. This is an object that
+# returns either 'true' or 'false'
 
 require 'uri'
 require 'net/http'
@@ -16,8 +19,9 @@ module Poller
 
     class HttpProbe
 
-      def initialize(url_s, proxy_hostname = nil, proxy_port = nil, proxy_user = nil, proxy_pwd = nil)
+      def initialize(url_s, matcher, proxy_hostname = nil, proxy_port = nil, proxy_user = nil, proxy_pwd = nil)
         @uri = URI(url_s)
+        @matcher = matcher
         @proxy = Net::HTTP::Proxy(proxy_hostname, proxy_port, proxy_user, proxy_pwd)
       end
 

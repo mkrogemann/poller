@@ -7,8 +7,8 @@ module Poller
     describe HttpProbe do
       context '#initialize' do
 
-        it 'accepts a URL given as a String andv converts it to a URI' do
-          http_probe = HttpProbe.new('http://example.com/resource?id=1&token=asldfhljdhru74')
+        it 'accepts a URL given as a String and converts it to a URI' do
+          http_probe = HttpProbe.new('http://example.com/resource?id=1&token=asldfhljdhru74', nil)
 
           uri = http_probe.instance_variable_get(:@uri)
 
@@ -18,7 +18,7 @@ module Poller
         end
 
         it 'accepts a URL, a proxy hostname and a proxy port' do
-          http_probe = HttpProbe.new('http://example.com/resource?id=1&token=asldfhljdhru74', 'proxy.internal.com', 8080)
+          http_probe = HttpProbe.new('http://example.com/resource?id=1&token=asldfhljdhru74', nil, 'proxy.internal.com', 8080)
 
           http_proxy = http_probe.instance_variable_get(:@proxy)
 
@@ -26,7 +26,7 @@ module Poller
         end
 
         it 'accepts a URL, a proxy hostname, a proxy port and a proxy user/password pair' do
-          http_probe = HttpProbe.new('http://example.com/resource?id=1&token=asldfhljdhru74', 'proxy.internal.com', 8080, 'user', 'pwd')
+          http_probe = HttpProbe.new('http://example.com/resource?id=1&token=asldfhljdhru74', nil, 'proxy.internal.com', 8080, 'user', 'pwd')
 
           http_proxy = http_probe.instance_variable_get(:@proxy)
 
@@ -43,7 +43,7 @@ module Poller
         let(:http_response) { double('http_response') }
 
         it 'triggers an http request to the specified URL and exposes the response in case the request was successful' do
-          http_probe = HttpProbe.new('http://example.com/resource?id=1&token=asldfhljdhru74')
+          http_probe = HttpProbe.new('http://example.com/resource?id=1&token=asldfhljdhru74', nil)
           http_probe.instance_variable_set(:@proxy, http_proxy)
           uri = http_probe.instance_variable_get(:@uri)
 
@@ -56,7 +56,7 @@ module Poller
         end
 
         it 'triggers an http request to the specified URL and raises a RuntimeError in case the request was not successful' do
-          http_probe = HttpProbe.new('http://example.com/resource?id=1&token=asldfhljdhru74')
+          http_probe = HttpProbe.new('http://example.com/resource?id=1&token=asldfhljdhru74', nil)
           http_probe.instance_variable_set(:@proxy, http_proxy)
 
           http_proxy.should_receive(:get_response).and_return(http_response)
@@ -69,7 +69,7 @@ module Poller
         end
 
         it 'triggers an http request that runs into an Exception which gets wrapped into a RuntimeError' do
-          http_probe = HttpProbe.new('http://example.com/resource?id=1&token=asldfhljdhru74')
+          http_probe = HttpProbe.new('http://example.com/resource?id=1&token=asldfhljdhru74', nil)
           http_probe.instance_variable_set(:@proxy, http_proxy)
 
           http_proxy.should_receive(:get_response).and_raise(Exception.new('some message'))
@@ -79,6 +79,7 @@ module Poller
           }.to raise_error(RuntimeError, "#sample caught an Exception of class Exception with message: some message")
 
         end
+
 
       end
 

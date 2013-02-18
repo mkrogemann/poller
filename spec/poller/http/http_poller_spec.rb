@@ -10,7 +10,7 @@ module Poller
       context '#initialize' do
 
         it 'constructs an HttpPoller with an HttpProbe constructed from a URL' do
-          http_poller = HttpPoller.new('http://example.com/resource?id=1&token=asldfhljdhru74', Float::MAX, Float::MIN)
+          http_poller = HttpPoller.new('http://example.com/resource?id=1&token=asldfhljdhru74', nil, Float::MAX, Float::MIN)
 
           probe = http_poller.instance_variable_get(:@probe)
 
@@ -23,7 +23,7 @@ module Poller
           proxy.port = 8080
           proxy.user = 'proxy_user'
           proxy.password = 'humptydumpty'
-          http_poller = HttpPoller.new('http://example.com/resource?id=1&token=asldfhljdhru74', Float::MAX, Float::MIN, proxy)
+          http_poller = HttpPoller.new('http://example.com/resource?id=1&token=asldfhljdhru74', nil, Float::MAX, Float::MIN, proxy)
 
           probe = http_poller.instance_variable_get(:@probe)
           probe_proxy = probe.instance_variable_get(:@proxy)
