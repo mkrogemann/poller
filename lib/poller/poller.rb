@@ -6,10 +6,11 @@
 module Poller
   module Poller
 
-    def initialize(probe, timeout_s, period_s)
+    def initialize(probe, matcher, timeout_s, period_s)
       @probe = probe
       @timeout_s = timeout_s
       @period_s = period_s
+      @matcher = matcher
     end
 
     def check
