@@ -23,7 +23,7 @@ module Matchers
 
       context '#satisfied?' do
 
-        it 'caompares a given String with response.body' do
+        it 'compares a given String with response.body' do
           http_response.stub(:body).and_return("some too long to read char noise")
 
           rbc = ResponseBodyContains.new(http_response, 'ng to read cha')
@@ -31,12 +31,20 @@ module Matchers
           rbc.satisfied?.should be_true
         end
 
-        it 'caompares a given Regexp with response.body' do
+        it 'matches a given Regexp with response.body (happy case)' do
           http_response.stub(:body).and_return("some too long to read char noise")
 
           rbc = ResponseBodyContains.new(http_response, /oo/)
 
           rbc.satisfied?.should be_true
+        end
+
+        it 'matches a given Regexp with response.body (no match)' do
+          http_response.stub(:body).and_return("some too long to read char noise")
+
+          rbc = ResponseBodyContains.new(http_response, /o ln/)
+
+          rbc.satisfied?.should be_false
         end
       end
 
