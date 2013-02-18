@@ -13,7 +13,7 @@ module Poller
     end
 
     def check
-      # comment on testability
+      # This following line allows us to inject a timeout object from within our tests
       @timeout ||= Timeout.new(@timeout_s)
 
       while !@probe.satisfied?
