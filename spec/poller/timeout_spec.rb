@@ -10,7 +10,7 @@ module Poller
         Timeout.new(-1.8).occured?.should be_true
       end
 
-      it 'returns false before timeout period has expired' do
+      it 'returns false as long as timeout period has not expired' do
         Timeout.new(Float::MAX).occured?.should be_false
       end
 
