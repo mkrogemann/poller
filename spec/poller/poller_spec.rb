@@ -48,7 +48,7 @@ module Poller
       end
 
 
-      it 'raises a RuntimeException if probe remains unsatisfied while timeout occurs' do
+      it 'raises a RuntimeError if probe remains unsatisfied while timeout occurs' do
         probe.stub(:satisfied?).and_return(false, false)
         timeout.stub(:occured?).and_return(false, true)
 
