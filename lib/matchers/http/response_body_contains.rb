@@ -6,14 +6,13 @@ module Matchers
 
     class ResponseBodyContains
 
-      def initialize(http_response, search_term)
-        @http_response = http_response
+      def initialize(search_term)
         @search_term = search_term
       end
 
-      def satisfied?
-        return @search_term.match(@http_response.body) if @search_term.class == Regexp
-        @http_response.body.include?(@search_term)
+      def matches?(http_response)
+        return @search_term.match(http_response.body) if @search_term.class == Regexp
+        http_response.body.include?(@search_term)
       end
 
     end

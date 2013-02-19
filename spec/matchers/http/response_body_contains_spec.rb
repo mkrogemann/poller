@@ -6,45 +6,45 @@ module Matchers
 
     describe ResponseBodyContains do
 
-      let(:http_response) { double('http_response') }
-
       context '#initialze' do
 
-        it 'will take an HTTPResponse object and a string to look for' do
-          rbc = ResponseBodyContains.new(http_response, 'some searchstring')
+        it 'will take a string to look for' do
+          rbc = ResponseBodyContains.new('some searchstring')
         end
 
-        it 'will take an HTTPResponse object and a Regex to match against' do
-          rbc = ResponseBodyContains.new(http_response, /regexen/)
+        it 'will take a Regex to match against' do
+          rbc = ResponseBodyContains.new(/regexen/)
         end
 
       end
 
 
-      context '#satisfied?' do
+      context '#matches?' do
 
-        it 'compares a given String with response.body' do
+        let(:http_response) { double('http_response') }
+
+        it 'returns true if a given String is contained in response.body' do
           http_response.stub(:body).and_return("some too long to read char noise")
 
-          rbc = ResponseBodyContains.new(http_response, 'ng to read cha')
+          rbc = ResponseBodyContains.new('ng to read cha')
 
-          rbc.satisfied?.should be_true
+          rbc.matches?(http_response).should be_true
         end
 
         it 'matches a given Regexp with response.body (happy case)' do
           http_response.stub(:body).and_return("some too long to read char noise")
 
-          rbc = ResponseBodyContains.new(http_response, /oo/)
+          rbc = ResponseBodyContains.new(/oo/)
 
-          rbc.satisfied?.should be_true
+          rbc.matches?(http_response).should be_true
         end
 
         it 'matches a given Regexp with response.body (no match)' do
           http_response.stub(:body).and_return("some too long to read char noise")
 
-          rbc = ResponseBodyContains.new(http_response, /o ln/)
+          rbc = ResponseBodyContains.new(/o ln/)
 
-          rbc.satisfied?.should be_false
+          rbc.matches?(http_response).should be_false
         end
       end
 
