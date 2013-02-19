@@ -8,8 +8,8 @@ module Poller
   class PollerModuleHolder
     include Poller
 
-    def initialize(probe, matcher, timeout_s, period_s)
-      super(probe, timeout_s, period_s)
+    def initialize(probe, matcher, timeout_s, period_s, name = nil)
+      super(probe, timeout_s, period_s, name)
     end
   end
 
@@ -60,12 +60,12 @@ module Poller
         probe.should_receive(:satisfied?).exactly(:twice)
 
         # we set matcher and timeout_s to nil as it is out of this example's scope (and because we mock it)
-        poller = PollerModuleHolder.new(probe, nil, nil, 0.0001)
+        poller = PollerModuleHolder.new(probe, nil, nil, 0.0001, 'descriptive name here')
         poller.instance_variable_set(:@timeout, timeout)
 
         expect {
           poller.check
-        }.to raise_error(RuntimeError, /^Timeout period has been exceeded$/)
+        }.to raise_error(RuntimeError, 'Timeout period has been exceeded for Poller (descriptive name here)')
       end
 
     end

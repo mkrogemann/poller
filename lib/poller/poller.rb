@@ -12,10 +12,11 @@ require 'poller/timeout'
 module Poller
   module Poller
 
-    def initialize(probe, timeout_s, period_s)
+    def initialize(probe, timeout_s, period_s, name = nil)
       @probe = probe
       @timeout_s = timeout_s
       @period_s = period_s
+      @name = name.nil? ? "no name given" : name
     end
 
     def check
@@ -23,7 +24,7 @@ module Poller
       @timeout ||= Timeout.new(@timeout_s)
 
       while !@probe.satisfied?
-        raise RuntimeError, 'Timeout period has been exceeded' if @timeout.occured?
+        raise RuntimeError, "Timeout period has been exceeded for Poller (#{@name})" if @timeout.occured?
         Kernel.sleep @period_s
 
         @probe.sample
