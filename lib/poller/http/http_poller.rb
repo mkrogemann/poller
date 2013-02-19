@@ -16,7 +16,7 @@ module Poller
         probe = proxy.nil? \
           ? HttpProbe.new(url, matcher) \
           : HttpProbe.new(url, matcher, proxy.hostname, proxy.port, proxy.user, proxy.password)
-        super(probe, matcher, timeout_s, period_s)
+        super(probe, timeout_s, period_s)
       end
 
     end

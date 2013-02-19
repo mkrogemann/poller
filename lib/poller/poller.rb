@@ -6,11 +6,10 @@
 module Poller
   module Poller
 
-    def initialize(probe, matcher, timeout_s, period_s)
+    def initialize(probe, timeout_s, period_s)
       @probe = probe
       @timeout_s = timeout_s
       @period_s = period_s
-      @matcher = matcher
     end
 
     def check
@@ -20,7 +19,12 @@ module Poller
       while !@probe.satisfied?
         raise RuntimeError, 'Timeout period has been exceeded' if @timeout.occured?
         Kernel.sleep @period_s
+
+        # take next sample
+
       end
+
+
     end
 
   end

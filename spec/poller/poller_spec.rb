@@ -9,7 +9,7 @@ module Poller
     include Poller
 
     def initialize(probe, matcher, timeout_s, period_s)
-      super
+      super(probe, timeout_s, period_s)
     end
   end
 
