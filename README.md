@@ -21,11 +21,34 @@ Or install it directly on your command line
 
 Usage
 -----
-TBD
+Find below an example usage of HttpPoller and an Http Response Matcher
+
+    require 'poller'
+
+    matcher = Matchers::HTTP::ResponseBodyContains.new(/your regex/)
+    #  alternatively pass in a String
+
+    poller = Poller::HTTP::HttpPoller.new("http://your.sut.example.com", matcher, 5.0, 3.0)
+    #  timeout 5s, poll every 3s
+
+    poller.check
+
+The above code will either terminate happily and return nil as soon as the expected result is found in the http response body. The matcher passed into the Poller's constructor is used to determine whether the result matches the expectation.
+
+In the unhappy case, the call will eventually run into a Timeout resulting in a RuntimeError such as this:
+
+    RuntimeError: Timeout period has been exceeded for Poller (http://your.sut.example.com)
+    ...
+
+In case you have to use a Proxy to reach the system under test, use this syntax:
+
+    proxy = { :hostname => 'proxy.internal.example.com', :port => 8080, :user => 'user', :password => '_secret' }
+
+    poller = Poller::HTTP::HttpPoller.new("http://your.sut.example.com", matcher, 5.0, 3.0, proxy)
 
 Scope &amp; Feature Requests
 ----------------------------
-In its current implementation stage, the gem focuses on systems that are accessible via http calls.
+In its current implementation stage, the gem focuses on systems that are accessible via http calls. Redirections are not followed as it stands today.
 
 Please contact me in case you have ideas/feature requests both in terms of http-based systems and extensions for non http-based systems.
 
