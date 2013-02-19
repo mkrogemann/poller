@@ -21,10 +21,11 @@ module Poller
 
     context '#check' do
 
-      it 'succeeds after 1 poll' do
-        # we want to test that the sleep method never gets executed
-        Kernel.should_not_receive(:sleep)
+      it 'succeeds immediately (probe is satisfied on first call)' do
         probe.should_receive(:satisfied?).once.and_return(true)
+        # we want to test that the sleep and sample methods never get executed
+        Kernel.should_not_receive(:sleep)
+        probe.should_not_receive(:sample)
 
         # we set matcher, timeout_s and period_s to nil as they are out of this example's scope. no need
         # to use the timeout mock here as it will not get called because first poll already succeeds
@@ -32,12 +33,13 @@ module Poller
       end
 
 
-      it 'succeeds after 3 polls' do
+      it 'succeeds after taking the third sample' do
         probe.stub(:satisfied?).and_return(false, false, true)
         timeout.stub(:occured?).and_return(false, false, false)
 
         # sleep should have been called twice, probe.satisfied? thrice
         Kernel.should_receive(:sleep).twice
+        probe.should_receive(:sample).twice
         probe.should_receive(:satisfied?).exactly(3).times
 
         # we set matcher and timeout_s to nil as it is out of this example's scope (and because we mock it)
@@ -54,6 +56,7 @@ module Poller
 
         # sleep should have been called once
         Kernel.should_receive(:sleep).once
+        probe.should_receive(:sample).once
         probe.should_receive(:satisfied?).exactly(:twice)
 
         # we set matcher and timeout_s to nil as it is out of this example's scope (and because we mock it)

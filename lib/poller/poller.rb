@@ -1,7 +1,11 @@
 # This module handles the generic bits of the poller gem and
 # is intended to be mixed into any concrete Poller implementations
 # The generic parts include the periodic checking of a Probe and
-# raising a RuntimeError in case the timeout period has been exceeded
+# raising a RuntimeError in case the timeout period has been exceeded.
+#
+# Poller expects that the probe object has methods called 'satisfied?'
+# that will return a boolean and 'sample' which takes the next sample
+# and has no explicit return value.
 
 module Poller
   module Poller
@@ -20,8 +24,7 @@ module Poller
         raise RuntimeError, 'Timeout period has been exceeded' if @timeout.occured?
         Kernel.sleep @period_s
 
-        # take next sample
-
+        @probe.sample
       end
 
 
