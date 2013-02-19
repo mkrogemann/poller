@@ -31,6 +31,16 @@ module Poller
           probe_proxy.proxy_user.should == 'proxy_user'
         end
 
+        it 'constructs an HttpPoller with Proxy information given in a Hash' do
+          proxy = { :hostname => 'proxy.internal.com', :port => 8080, :user => 'user', :password => '_secret' }
+          http_poller = HttpPoller.new('http://example.com/resource?id=1&token=asldfhljdhru74', nil, Float::MAX, Float::MIN, proxy)
+
+          probe = http_poller.instance_variable_get(:@probe)
+          probe_proxy = probe.instance_variable_get(:@proxy)
+
+          probe_proxy.proxy_pass.should == '_secret'
+        end
+
       end
 
     end
