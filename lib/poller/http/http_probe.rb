@@ -29,7 +29,7 @@ module Poller
       def sample
         begin
           @http_response = @proxy.get_response(@uri)
-          return if @http_response.class == Net::HTTPSuccess
+          return if @http_response.class == Net::HTTPOK
         rescue Exception => e
           raise RuntimeError, "#sample caught an Exception of class #{e.class} with message: #{e.message}"
         end

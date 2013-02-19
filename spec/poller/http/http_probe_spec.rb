@@ -48,12 +48,12 @@ module Poller
           uri = http_probe.instance_variable_get(:@uri)
 
           http_proxy.should_receive(:get_response).with(uri).and_return(http_response)
-          http_response.should_receive(:class).twice.and_return(Net::HTTPSuccess)
+          http_response.should_receive(:class).twice.and_return(Net::HTTPOK)
 
           http_probe.sample
           response = http_probe.instance_variable_get(:@http_response)
 
-          response.class.should == Net::HTTPSuccess
+          response.class.should == Net::HTTPOK
         end
 
         it 'triggers an http request to the specified URL and raises a RuntimeError in case the request was not successful' do
