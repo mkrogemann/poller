@@ -20,20 +20,25 @@ module Poller
 
     class HttpProbe
 
-      def initialize(url_s, matcher_class, proxy_hostname = nil, proxy_port = nil, proxy_user = nil, proxy_pwd = nil)
+      def initialize(url_s, matcher, proxy_hostname = nil, proxy_port = nil, proxy_user = nil, proxy_pwd = nil)
         @uri = URI(url_s)
-        @matcher_class = matcher_class
+        @matcher = matcher
         @proxy = Net::HTTP::Proxy(proxy_hostname, proxy_port, proxy_user, proxy_pwd)
       end
 
       def sample
         begin
-          http_response = @proxy.get_response(@uri)
-          return http_response if http_response.class == Net::HTTPSuccess
+          @http_response = @proxy.get_response(@uri)
+          return if @http_response.class == Net::HTTPSuccess
         rescue Exception => e
           raise RuntimeError, "#sample caught an Exception of class #{e.class} with message: #{e.message}"
         end
-        raise RuntimeError, "HTTP request failed, the error class is: #{http_response.class}"
+        raise RuntimeError, "HTTP request failed, the error class is: #{@http_response.class}"
+      end
+
+      def satisfied?
+        return false if @http_response.nil?
+        @matcher.matches?(@http_response)
       end
 
     end

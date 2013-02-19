@@ -50,7 +50,8 @@ module Poller
           http_proxy.should_receive(:get_response).with(uri).and_return(http_response)
           http_response.should_receive(:class).twice.and_return(Net::HTTPSuccess)
 
-          response = http_probe.sample
+          http_probe.sample
+          response = http_probe.instance_variable_get(:@http_response)
 
           response.class.should == Net::HTTPSuccess
         end
@@ -80,6 +81,23 @@ module Poller
 
         end
 
+      end
+
+
+      context '#satisfied?' do
+
+        let(:matcher) { double('matcher') }
+        let(:http_response) { double('http_response') }
+
+        it 'sends a #matches? message to its matcher and receives true' do
+          http_probe = HttpProbe.new('http://example.com/resource?id=1&token=asldfhljdhru74', matcher)
+          http_probe.instance_variable_set(:@http_response, http_response)
+
+          http_response.should_receive(:nil?).and_return(false)
+          matcher.should_receive(:matches?).with(http_response).once.and_return(true)
+
+          http_probe.satisfied?.should be_true
+        end
 
       end
 
