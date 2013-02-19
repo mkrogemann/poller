@@ -4,7 +4,7 @@ require File.expand_path('../lib/poller/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["Markus Krogemann"]
   gem.email         = ["markus@krogemann.de"]
-  gem.description   = %q{Implementations of Poller and Probe as inspired by Stefe Freeman and Nat Pryce in their GOOS book}
+  gem.description   = %q{Implementations of Poller and Probe as inspired by Steve Freeman and Nat Pryce in their GOOS book}
   gem.summary       = %q{Pollers and Probes}
   gem.homepage      = "https://github.com/mkrogemann/poller"
 
