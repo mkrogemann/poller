@@ -2,3 +2,4 @@
 /rspec
 /Gemfile.lock
 /doc
+/*.gem
