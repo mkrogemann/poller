@@ -8,6 +8,7 @@
 # { :hostname => 'proxy.internal.com', :port => 8080, :user => 'user', :password => 'pwd' }
 
 require 'poller/poller'
+require 'poller/http/http_probe'
 require 'ostruct'
 
 module Poller

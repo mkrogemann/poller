@@ -7,6 +7,8 @@
 # that will return a boolean and 'sample' which takes the next sample
 # and has no explicit return value.
 
+require 'poller/timeout'
+
 module Poller
   module Poller
 
