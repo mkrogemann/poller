@@ -8,8 +8,9 @@
 # into a RuntimeError as this class expects a GET request to return 200|OK in
 # its current implementation.
 #
-# HttpProbe also expects a matcher to be passed in. This is an object that
-# returns either 'true' or 'false'
+# HttpProbe also expects a matcher_class to be passed in. This must be a class
+# name of a class that can be constructed into objects that return either 'true'
+# or 'false' when sent the 'satisfied?' message
 
 require 'uri'
 require 'net/http'
@@ -19,9 +20,9 @@ module Poller
 
     class HttpProbe
 
-      def initialize(url_s, matcher, proxy_hostname = nil, proxy_port = nil, proxy_user = nil, proxy_pwd = nil)
+      def initialize(url_s, matcher_class, proxy_hostname = nil, proxy_port = nil, proxy_user = nil, proxy_pwd = nil)
         @uri = URI(url_s)
-        @matcher = matcher
+        @matcher_class = matcher_class
         @proxy = Net::HTTP::Proxy(proxy_hostname, proxy_port, proxy_user, proxy_pwd)
       end
 
