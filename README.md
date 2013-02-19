@@ -60,8 +60,6 @@ The gem has been developed to run in Ruby 1.9.3 but will also run in Ruby 1.8.7.
 
 One design goal has been to work without external dependencies. Therefore it does not use such beautiful gems like the fabulous 'rest-client'. Proxy support has been built on top of the less comfortable net/http API.
 
-Proxy configuration in the classes designed to be used in your tests (eg HttpPoller) is done by passing in the proxy information in an OpenStruct instance (see Usage). Proxies requiring authentication are supported.
+Extensions that require additional gems should be implemented as gems of their own. This way, users don't have to pull in any dependencies they don't really need (e.g. AMQP).
 
-
-
-
+Proxy configuration is done by passing in the proxy information in an OpenStruct instance or alternatively as a Hash (see Usage). Proxies requiring authentication are supported.
