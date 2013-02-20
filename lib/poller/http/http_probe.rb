@@ -11,9 +11,14 @@
 # HttpProbe also expects a matcher to be passed in. The matcher must return
 # either 'true or 'false' when given the http_response for evaluation via
 # its 'matches?' method.
+#
+# SSL is supported but certificates are not verified.
+#
+# Basic Auth is also supported in case userinfo appears in URL.
 
 require 'uri'
 require 'net/http'
+require 'net/https'
 
 module Poller
   module HTTP
@@ -21,14 +26,24 @@ module Poller
     class HttpProbe
 
       def initialize(url_s, matcher, proxy_hostname = nil, proxy_port = nil, proxy_user = nil, proxy_pwd = nil)
-        @uri = URI(url_s)
+        @uri = URI.parse(url_s)
         @matcher = matcher
-        @proxy = Net::HTTP::Proxy(proxy_hostname, proxy_port, proxy_user, proxy_pwd)
+        @proxy = Net::HTTP::Proxy(proxy_hostname, proxy_port, proxy_user, proxy_pwd).new(@uri.host, @uri.port)
       end
 
       def sample
         begin
-          @http_response = @proxy.get_response(@uri)
+          # support SSL, not veryfing the SSL certificates (out of scope from my perspective)
+          if @uri.scheme == 'https'
+            @proxy.use_ssl = true
+            @proxy.verify_mode = OpenSSL::SSL::VERIFY_NONE
+          end
+          request = Net::HTTP::Get.new(@uri.request_uri)
+          # support basic auth if userinfo appears in url
+          if @uri.userinfo
+            request.basic_auth(@uri.user, @uri.password)
+          end
+          @http_response = @proxy.request(request)
           return if @http_response.class == Net::HTTPOK
         rescue Exception => e
           raise RuntimeError, "#sample caught an Exception of class #{e.class} with message: #{e.message}"

@@ -47,7 +47,7 @@ module Poller
           http_probe.instance_variable_set(:@proxy, http_proxy)
           uri = http_probe.instance_variable_get(:@uri)
 
-          http_proxy.should_receive(:get_response).with(uri).and_return(http_response)
+          http_proxy.should_receive(:request).and_return(http_response)
           http_response.should_receive(:class).twice.and_return(Net::HTTPOK)
 
           http_probe.sample
@@ -60,7 +60,7 @@ module Poller
           http_probe = HttpProbe.new('http://example.com/resource?id=1&token=asldfhljdhru74', nil)
           http_probe.instance_variable_set(:@proxy, http_proxy)
 
-          http_proxy.should_receive(:get_response).and_return(http_response)
+          http_proxy.should_receive(:request).and_return(http_response)
           http_response.should_receive(:class).twice.and_return(Net::HTTPBadRequest)
 
           expect {
@@ -73,7 +73,7 @@ module Poller
           http_probe = HttpProbe.new('http://example.com/resource?id=1&token=asldfhljdhru74', nil)
           http_probe.instance_variable_set(:@proxy, http_proxy)
 
-          http_proxy.should_receive(:get_response).and_raise(Exception.new('some message'))
+          http_proxy.should_receive(:request).and_raise(Exception.new('some message'))
 
           expect {
             http_probe.sample
