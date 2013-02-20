@@ -46,6 +46,13 @@ In case you have to use a Proxy to reach the system under test, use this syntax:
 
     poller = Poller::HTTP::HttpPoller.new("http://your.sut.example.com", matcher, 5.0, 3.0, proxy)
 
+In case you need to authenticate against the resource you are polling add user:password to the URL like so:
+
+    poller = Poller::HTTP::HttpPoller.new("http://user:password@your.sut.example.com", matcher, 5.0, 1.0, proxy)
+
+SSL is supported but certificates will not be verified, so using invalid certificates (which is a common thing to do, right?) will not raise an exception.
+
+
 Scope &amp; Feature Requests
 ----------------------------
 In its current implementation stage, the gem focuses on systems that are accessible via http calls. Redirections are not followed as it stands today.
