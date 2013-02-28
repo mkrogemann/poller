@@ -35,7 +35,7 @@ Find below an example usage of HttpPoller and an Http Response Matcher
 
 The above code will either terminate happily and return nil as soon as the expected result is found in the http response body. The matcher passed into the Poller's constructor is used to determine whether the result matches the expectation.
 
-In the unhappy case, the call will eventually run into a Timeout resulting in a RuntimeError such as this:
+Or, in the unhappy case, the call will eventually run into a Timeout resulting in a RuntimeError being raised with a message similar to this:
 
     RuntimeError: Timeout period has been exceeded for Poller (http://your.sut.example.com)
     ...
@@ -55,9 +55,9 @@ SSL is supported but certificates will not be verified, so using invalid certifi
 
 Scope &amp; Feature Requests
 ----------------------------
-In its current implementation stage, the gem focuses on systems that are accessible via http calls. Redirections are not followed as it stands today.
+In its current implementation stage, the gem focuses on systems that are accessible via http calls. Redirects are not followed as it stands today.
 
-Please contact me in case you have ideas/feature requests both in terms of http-based systems and extensions for non http-based systems.
+Please contact me in case you have ideas/feature requests both in terms of http-based systems and concerning extensions for non http-based systems.
 
 Pull requests and bug reports are welcome!
 
@@ -65,7 +65,7 @@ Design
 ------
 The gem has been developed to run in Ruby 1.9.3 and is being continuously integrated in Ruby 2.0.0, 1.9.3 and 1.8.7.
 
-One design goal has been to work without external dependencies. Therefore it does not use such beautiful gems like the fabulous 'rest-client'. Proxy support has been built on top of the less comfortable net/http API.
+One design goal has been to work without external dependencies. Therefore, it does not make use of gems such as the fabulous 'rest-client'. Proxy support has been built on top of the less comfortable net/http API.
 
 Extensions that require additional gems should be implemented as gems of their own. This way, users don't have to pull in any dependencies they don't really need (e.g. AMQP).
 
