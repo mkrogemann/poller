@@ -1,6 +1,7 @@
 poller
 ======
 
+[![Gem Version](https://badge.fury.io/rb/poller.png)](http://badge.fury.io/rb/poller)
 [![Build Status](https://travis-ci.org/mkrogemann/poller.png)](https://travis-ci.org/mkrogemann/poller)
 [![Code Climate](https://codeclimate.com/github/mkrogemann/poller.png)](https://codeclimate.com/github/mkrogemann/poller)
 [![Dependency Status](https://gemnasium.com/mkrogemann/poller.png)](https://gemnasium.com/mkrogemann/poller)
