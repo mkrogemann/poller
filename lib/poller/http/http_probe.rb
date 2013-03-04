@@ -1,12 +1,13 @@
 # The HttpProbe class is built on top of the Ruby built-in net/http library.
-# Proxy support is provided. Please note that the Net::HTTP::Proxy  method will
-# return a Net::HTTP object if no proxy information is given (ie proxy_hostname is nil)
+# Proxy support is provided. Please note that the Net::HTTP::Proxy method will
+# return a Net::HTTP object if no proxy information is given (ie if proxy_hostname
+# is nil).
 #
 # The 'sample' method will wrap any Exception it may catch into a RuntimeError.
 #
-# Equally, any HTTP Response other than Net::HTTPSuccess will also get wrapped
+# Equally, any HTTP Response other than Net::HTTPOK will also get wrapped
 # into a RuntimeError as this class expects a GET request to return 200|OK or
-# equivalent HTTP Success objects in its current implementation.
+# in its current implementation. Redirects will therefore be regarded as a failure.
 #
 # HttpProbe also expects a matcher to be passed in. The matcher must return
 # either 'true or 'false' when given the http_response for evaluation via
@@ -14,7 +15,7 @@
 #
 # SSL is supported but certificates are not verified.
 #
-# Basic Auth is also supported in case userinfo appears in URL.
+# Basic Auth is also supported in case userinfo appears in the passed in URL.
 
 require 'uri'
 require 'net/http'
