@@ -6,19 +6,6 @@ module Matchers
 
     describe ResponseBodyContains do
 
-      context '#initialze' do
-
-        it 'will take a string to look for' do
-          rbc = ResponseBodyContains.new('some searchstring')
-        end
-
-        it 'will take a Regex to match against' do
-          rbc = ResponseBodyContains.new(/regexen/)
-        end
-
-      end
-
-
       context '#matches?' do
 
         let(:http_response) { double('http_response') }
