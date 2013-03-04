@@ -41,11 +41,11 @@ module Poller
 
         let(:http_proxy) { double('http_proxy') }
         let(:http_response) { double('http_response') }
+        let(:http_request) { double('http_request') }
 
         it 'triggers an http request to the specified URL and exposes the response in case the request was successful' do
           http_probe = HttpProbe.new('http://example.com/resource?id=1&token=asldfhljdhru74', nil)
           http_probe.instance_variable_set(:@proxy, http_proxy)
-          uri = http_probe.instance_variable_get(:@uri)
 
           http_proxy.should_receive(:request).and_return(http_response)
           http_response.should_receive(:class).twice.and_return(Net::HTTPOK)
@@ -79,6 +79,31 @@ module Poller
             http_probe.sample
           }.to raise_error(RuntimeError, "#sample caught an Exception of class Exception with message: some message")
 
+        end
+
+        it 'activates ssl-mode when given URL has https scheme' do
+          http_probe = HttpProbe.new('https://example.com/resource?id=1&token=asldfhljdhru74', nil)
+          http_probe.instance_variable_set(:@proxy, http_proxy)
+
+          http_proxy.should_receive(:use_ssl=).with(true).once
+          http_proxy.should_receive(:verify_mode=).with(OpenSSL::SSL::VERIFY_NONE).once
+          http_proxy.should_receive(:request).and_return(http_response)
+          http_response.should_receive(:class).once.and_return(Net::HTTPOK)
+
+          http_probe.sample
+        end
+
+        it 'activates basic authentication when given URL contains userinfo' do
+          http_probe = HttpProbe.new('http://user:password@example.com/resource?id=1&token=asldfhljdhru74', nil)
+          http_probe.instance_variable_set(:@proxy, http_proxy)
+          uri = http_probe.instance_variable_get(:@uri)
+
+          Net::HTTP::Get.should_receive(:new).with(uri.request_uri).once.and_return(http_request)
+          http_request.should_receive(:basic_auth).with('user', 'password').once
+          http_proxy.should_receive(:request).and_return(http_response)
+          http_response.should_receive(:class).once.and_return(Net::HTTPOK)
+
+          http_probe.sample
         end
 
       end
