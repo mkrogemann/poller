@@ -7,6 +7,7 @@ Gem::Specification.new do |gem|
   gem.description   = %q{Implementations of Poller and Probe as inspired by Steve Freeman and Nat Pryce in their GOOS book}
   gem.summary       = %q{Pollers and Probes}
   gem.homepage      = "https://github.com/mkrogemann/poller"
+  gem.licence       = 'MIT'
 
   gem.files         = Dir['lib/**/*.rb']
   gem.test_files    = []
