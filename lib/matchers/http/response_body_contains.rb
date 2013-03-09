@@ -9,12 +9,12 @@ module Matchers
 
     class ResponseBodyContains
 
-      # Expects either a String or a Regexp
+      # @param search_term [String | Regexp] - the search term
       def initialize(search_term)
         @search_term = search_term
       end
 
-      # Expects a Net::HTTPResponse object
+      # @param http_response [Net::HTTPResponse object] - the http response
       def matches?(http_response)
         return @search_term.match(http_response.body) if @search_term.class == Regexp
         http_response.body.include?(@search_term)
