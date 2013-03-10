@@ -31,7 +31,7 @@ module Matchers
           dcx.matches?(http_response).should be_true
         end
 
-        it 'returns true if a given XPath is contained a given number of times within the XML document' do
+        it 'returns true if a given XPath is contained at least given number of times within the XML document' do
 
           http_response.stub(:body).and_return(sample_xml_string)
           xml_doc = REXML::Document.new(http_response.body)
