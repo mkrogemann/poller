@@ -3,6 +3,10 @@
 #
 # The matches? method takes a Net::HTTPResponse object and will apply
 # the search_term to the result of the XPath querying the HTTPResponse.body
+#
+# = Example
+#   xct = XPathContainsText.new('//ElementA/ElementB', 'Text that I expect')
+#
 
 require 'rexml/document'
 
