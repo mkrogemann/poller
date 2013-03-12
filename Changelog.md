@@ -1,14 +1,21 @@
 Changelog
 =========
 
-Version 0.2.0
+Version 0.3.0 - released 2013-03-12
+-------------
+
+* Add two XPath related matchers:
+ * DocumentContainsXPath checks for occurence of XPaths (and optionally) the number of occurrences
+ * XPathContainsText checks for presence of given search text (or Regex) under given XPath
+
+Version 0.2.0 - released 2013-02-20
 -------------
 
 * Add capability to use SSL (certificates are not verfied making it possible to use invalid certificates)
 * Add basic authentication (userinfo must be given in URL)
 
 
-Version 0.1.1
+Version 0.1.1 - released 2013-02-20
 -------------
 
 First public release
