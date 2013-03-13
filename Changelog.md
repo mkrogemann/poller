@@ -15,7 +15,7 @@ Version 0.2.0 - released 2013-02-20
 * Add basic authentication (userinfo must be given in URL)
 
 
-Version 0.1.1 - released 2013-02-20
+Version 0.1.1 - released 2013-02-19
 -------------
 
 First public release
