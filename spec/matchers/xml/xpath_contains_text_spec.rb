@@ -17,22 +17,16 @@ module Matchers
 
       context '#matches?' do
 
-        let(:http_response) { double('http_response') }
-
-        it 'returns true if a given String is contained at given XPath within the XML document parsed from response.body' do
-          http_response.stub(:body).and_return(sample_xml_string)
-
+        it 'returns true if a given String is contained at given XPath within the XML document' do
           xct = XPathContainsText.new('//A/B', 'humpty')
 
-          xct.matches?(http_response).should be_true
+          xct.matches?(sample_xml_string).should be_true
         end
 
-        it 'returns true if a given Regex matches the text at given XPath within the XML document parsed from response.body' do
-          http_response.stub(:body).and_return(sample_xml_string)
-
+        it 'returns true if a given Regex matches the text at given XPath within the XML document' do
           xct = XPathContainsText.new('//A/B', /ump/)
 
-          xct.matches?(http_response).should be_true
+          xct.matches?(sample_xml_string).should be_true
         end
 
       end

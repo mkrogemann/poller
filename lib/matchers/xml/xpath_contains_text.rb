@@ -1,8 +1,8 @@
 # This class expects a String holding an XPath expression and a search_term
 # in its constructor which can be either a String or a Regexp
 #
-# The matches? method takes a Net::HTTPResponse object and will apply
-# the search_term to the result of the XPath querying the HTTPResponse.body
+# The matches? method takes a String (eg response body) and applies the search_term
+# to the result of the XPath querying the document given in said String
 #
 # = Example
 #   xct = XPathContainsText.new('//ElementA/ElementB', 'Text that I expect')
@@ -22,9 +22,9 @@ module Matchers
         @search_term = search_term
       end
 
-      # @param http_response [Net::HTTPResponse object] - the http response
-      def matches?(http_response)
-        xml_doc = REXML::Document.new(http_response.body)
+      # @param document_s [String] - the XML document given as String
+      def matches?(document_s)
+        xml_doc = REXML::Document.new(document_s)
         xpath = REXML::XPath.first(xml_doc, @xpath_expr_s)
         return @search_term.match(xpath.text) if @search_term.class == Regexp
         xpath.text.include?(@search_term)
