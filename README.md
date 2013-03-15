@@ -5,8 +5,8 @@ poller
 [![Build Status](https://travis-ci.org/mkrogemann/poller.png)](https://travis-ci.org/mkrogemann/poller)
 [![Code Climate](https://codeclimate.com/github/mkrogemann/poller.png)](https://codeclimate.com/github/mkrogemann/poller)
 [![Coverage Status](https://coveralls.io/repos/mkrogemann/poller/badge.png?branch=master)](https://coveralls.io/r/mkrogemann/poller)
-[![Gem Version](https://badge.fury.io/rb/poller.png)](http://badge.fury.io/rb/poller)
 [![Dependency Status](https://gemnasium.com/mkrogemann/poller.png)](https://gemnasium.com/mkrogemann/poller)
+[![Gem Version](https://badge.fury.io/rb/poller.png)](http://badge.fury.io/rb/poller)
 
 poller is a Ruby gem that supports testing asynchronous calls to systems under test by exposing Poller implementations.
 
