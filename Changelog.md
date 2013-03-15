@@ -1,11 +1,11 @@
 Changelog
 =========
 
-Version 0.3.1 - unreleased
+Version 0.3.1 - release 2013-03-15
 
-* Improve tests (wording, remove REXML requirement)
+* Refactoring: Change expected input of matchers to be a String rather than http response
+* Improve tests (wording, remove redundant REXML requires)
 * Add Coveralls service and badge
-* Refactoring: change expected input of matchers to be the response body rather than http rsponse
 
 Version 0.3.0 - released 2013-03-12
 -------------
