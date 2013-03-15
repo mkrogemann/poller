@@ -1,6 +1,5 @@
 require 'spec_helper'
 require 'matchers/xml/xpath_contains_text'
-require 'rexml/document'
 
 module Matchers
   module XML
@@ -22,7 +21,6 @@ module Matchers
 
         it 'returns true if a given String is contained at given XPath within the XML document parsed from response.body' do
           http_response.stub(:body).and_return(sample_xml_string)
-          xml_doc = REXML::Document.new(http_response.body)
 
           xct = XPathContainsText.new('//A/B', 'humpty')
 
@@ -31,7 +29,6 @@ module Matchers
 
         it 'returns true if a given Regex matches the text at given XPath within the XML document parsed from response.body' do
           http_response.stub(:body).and_return(sample_xml_string)
-          xml_doc = REXML::Document.new(http_response.body)
 
           xct = XPathContainsText.new('//A/B', /ump/)
 
