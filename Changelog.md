@@ -1,6 +1,10 @@
 Changelog
 =========
 
+Version 0.3.1 - unreleased
+
+* Improve tests (wording, remove REXML requirement)
+
 Version 0.3.0 - released 2013-03-12
 -------------
 
