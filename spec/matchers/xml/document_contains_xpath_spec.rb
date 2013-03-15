@@ -1,6 +1,5 @@
 require 'spec_helper'
 require 'matchers/xml/document_contains_xpath'
-require 'rexml/document'
 
 module Matchers
   module XML
@@ -24,7 +23,6 @@ module Matchers
         it 'returns true if a given XPath is contained at least once within the XML document' do
 
           http_response.stub(:body).and_return(sample_xml_string)
-          xml_doc = REXML::Document.new(http_response.body)
 
           dcx = DocumentContainsXPath.new('/Agents')
 
@@ -34,17 +32,15 @@ module Matchers
         it 'returns true if a given XPath is contained at least given number of times within the XML document' do
 
           http_response.stub(:body).and_return(sample_xml_string)
-          xml_doc = REXML::Document.new(http_response.body)
 
           dcx = DocumentContainsXPath.new('/Agents/Agent', 2)
 
           dcx.matches?(http_response).should be_true
         end
 
-        it 'returns true if a given XPath is contained fewer times than specified' do
+        it 'returns false if a given XPath is contained fewer times than specified' do
 
           http_response.stub(:body).and_return(sample_xml_string)
-          xml_doc = REXML::Document.new(http_response.body)
 
           dcx = DocumentContainsXPath.new('/Agents/Agent', 3)
 
