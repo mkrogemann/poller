@@ -119,7 +119,9 @@ module Poller
           http_probe.instance_variable_set(:@http_response, http_response)
 
           http_response.should_receive(:nil?).and_return(false)
-          matcher.should_receive(:matches?).with(http_response).once.and_return(true)
+          http_response.should_receive(:body)
+
+          matcher.should_receive(:matches?).once.and_return(true)
 
           http_probe.satisfied?.should be_true
         end
