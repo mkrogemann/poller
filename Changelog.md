@@ -1,7 +1,11 @@
 Changelog
 =========
 
-Version 0.3.1 - release 2013-03-15
+Version 0.3.2 - released 2013-03-16
+
+* Bugfix: Make sure to pass a String to matchers in HttpProbe
+
+Version 0.3.1 - released 2013-03-15 -> yanked!
 
 * Refactoring: Change expected input of matchers to be a String rather than http response
 * Improve tests (wording, remove redundant REXML requires)
