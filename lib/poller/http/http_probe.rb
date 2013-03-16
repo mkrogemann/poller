@@ -54,7 +54,7 @@ module Poller
 
       def satisfied?
         return false if @http_response.nil?
-        @matcher.matches?(@http_response)
+        @matcher.matches?(@http_response.body)
       end
 
     end
