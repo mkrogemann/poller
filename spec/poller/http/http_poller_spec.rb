@@ -43,6 +43,38 @@ module Poller
 
       end
 
+      # integration tests...
+      context '#check' do
+
+        require 'matchers/http/response_body_contains'
+
+        it 'succeeds in fetching and matching an http response from example.com', :type => 'integration' do
+          matcher = Matchers::HTTP::ResponseBodyContains.new('<title>Example Domain</title>')
+          poller = HttpPoller.new("http://www.iana.org/domains/example", matcher, 3.0, 1.0)
+
+          poller.check.should be_nil
+        end
+
+        require 'matchers/xml/xpath_contains_text'
+
+        it 'succeeds in fetching an XML document and in finding a text for given XPath', :type => 'integration' do
+          matcher = Matchers::XML::XPathContainsText.new('/CATALOG/CD/TITLE', 'Empire Burlesque')
+          poller = HttpPoller.new("http://www.w3schools.com/xml/cd_catalog.xml", matcher, 3.0, 1.0)
+
+          poller.check.should be_nil
+        end
+
+        require 'matchers/xml/document_contains_xpath'
+
+        it 'succeeds in fetching an XML document and in finding a given XPath at least given number of times', :type => 'integration' do
+          matcher = Matchers::XML::DocumentContainsXPath.new('/CATALOG/CD/ARTIST', 11)
+          poller = HttpPoller.new("http://www.w3schools.com/xml/cd_catalog.xml", matcher, 3.0, 1.0)
+
+          poller.check.should be_nil
+        end
+
+      end
+
     end
 
   end

@@ -1,5 +1,6 @@
 /coverage
 /rspec
+/rspec-integration
 /Gemfile.lock
 /doc
 /*.gem
