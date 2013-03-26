@@ -8,7 +8,7 @@ poller
 [![Dependency Status](https://gemnasium.com/mkrogemann/poller.png)](https://gemnasium.com/mkrogemann/poller)
 [![Gem Version](https://badge.fury.io/rb/poller.png)](http://badge.fury.io/rb/poller)
 
-poller is a Ruby gem that supports integration testing of systems that contain calls to asynchronous components (eg Splunk, Search Servers, ...) by exposing Poller implementations.
+poller is a Ruby gem that supports integration testing of systems that contain calls to asynchronous components (eg Splunk, Search Servers, ...) by exposing Pollers, Probes and Matchers.
 
 It is in large parts inspired by the work of Steeve Freeman &amp; Nat Pryce and their excellent GOOS book ("Growing Object Oriented Software Guided By Tests").
 
@@ -24,6 +24,8 @@ Or install it directly on your command line
 
 Usage
 -----
+Complementary to this section, there is also a wiki page with more [Examples](https://github.com/mkrogemann/poller/wiki/Examples).
+
 Find below an example usage of HttpPoller and an Http Response Matcher
 
     require 'poller'
