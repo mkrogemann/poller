@@ -1,9 +1,11 @@
 Changelog
 =========
 
-Version 0.3.3 - unreleased
+Version 0.4.0 - unreleased
 -------------
 
+* Refactoring: Change/simplify sequence of calls inside Poller.check method
+* Make error message on timeout more informative (add total time and number of tries)
 * Add integration tests
 
 Version 0.3.2 - released 2013-03-16

@@ -73,6 +73,16 @@ module Poller
           poller.check.should be_nil
         end
 
+        # have a failing test to validate error message
+        it 'fails to find a given XPath in document', :type => 'integration' do
+          matcher = Matchers::XML::DocumentContainsXPath.new('/CATALOG/NOT_THERE/ARTIST', 11)
+          poller = HttpPoller.new("http://www.w3schools.com/xml/cd_catalog.xml", matcher, 3.0, 1.0)
+
+          expect {
+            poller.check
+          }.to raise_error(RuntimeError, /^Timeout period has been exceeded for Poller \(http:\/\/www.w3schools.com\/xml\/cd_catalog.xml\)\. Poller tried 3 times which in total took \d\.?\d* seconds\.$/)
+        end
+
       end
 
     end

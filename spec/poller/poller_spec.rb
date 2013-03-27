@@ -22,14 +22,19 @@ module Poller
     context '#check' do
 
       it 'succeeds immediately (probe is satisfied on first call)' do
-        probe.should_receive(:satisfied?).once.and_return(true)
-        # we want to test that the sleep and sample methods never get executed
-        Kernel.should_not_receive(:sleep)
-        probe.should_not_receive(:sample)
+        timeout.stub(:occured?).and_return(false)
+        probe.stub(:satisfied?).and_return(true)
 
-        # we set matcher, timeout_s and period_s to nil as they are out of this example's scope. no need
-        # to use the timeout mock here as it will not get called because first poll already succeeds
-        PollerModuleHolder.new(probe, nil, nil, nil).check
+        # sleep/sample/satisfied? called exactly once
+        probe.should_receive(:satisfied?).once
+        Kernel.should_receive(:sleep).once
+        probe.should_receive(:sample).once
+
+        # matcher, timeout_s and period_s are nil, they are out of this example's scope (mocked)
+        poller = PollerModuleHolder.new(probe, nil, nil, nil)
+        poller.instance_variable_set(:@timeout, timeout)
+
+        poller.check
       end
 
 
@@ -38,8 +43,8 @@ module Poller
         timeout.stub(:occured?).and_return(false, false, false)
 
         # sleep should have been called twice, probe.satisfied? thrice
-        Kernel.should_receive(:sleep).twice
-        probe.should_receive(:sample).twice
+        Kernel.should_receive(:sleep).exactly(3).times
+        probe.should_receive(:sample).exactly(3).times
         probe.should_receive(:satisfied?).exactly(3).times
 
         # we set matcher and timeout_s to nil as it is out of this example's scope (and because we mock it)
@@ -57,7 +62,7 @@ module Poller
         # sleep should have been called once
         Kernel.should_receive(:sleep).once
         probe.should_receive(:sample).once
-        probe.should_receive(:satisfied?).exactly(:twice)
+        probe.should_receive(:satisfied?).once
 
         # we set matcher and timeout_s to nil as it is out of this example's scope (and because we mock it)
         poller = PollerModuleHolder.new(probe, nil, nil, 0.0001, 'descriptive name here')
@@ -65,7 +70,7 @@ module Poller
 
         expect {
           poller.check
-        }.to raise_error(RuntimeError, 'Timeout period has been exceeded for Poller (descriptive name here)')
+        }.to raise_error(RuntimeError, /^Timeout period has been exceeded for Poller \(descriptive name here\)\. Poller tried \d times which in total took .* seconds\.$/)
       end
 
     end
