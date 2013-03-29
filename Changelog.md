@@ -1,7 +1,7 @@
 Changelog
 =========
 
-Version 0.4.0 - released
+Version 0.4.0 - released 2013-03-29
 -------------
 
 * Refactoring: Change/simplify sequence of calls inside Poller.check method
