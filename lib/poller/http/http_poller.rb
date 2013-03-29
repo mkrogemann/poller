@@ -1,5 +1,5 @@
 # The HttpPoller will constuct an HttpProbe and sample it periodically based on
-# the value given for period_s until a timeout occurs after timeout_s seconds.
+# the value given for period_seconds until a timeout occurs after timeout_seconds.
 #
 # The proxy information is expected to be either nil or given as an OpenStruct
 # with attributes 'hostname', 'port', 'user' and 'password'.
@@ -17,12 +17,12 @@ module Poller
     class HttpPoller
       include Poller
 
-      def initialize(url, matcher, timeout_s, period_s, proxy = nil)
+      def initialize(url, matcher, timeout_seconds, period_seconds, proxy = nil)
         proxy = OpenStruct.new(proxy) if proxy.is_a?(Hash)
         probe = proxy.nil? \
           ? HttpProbe.new(url, matcher) \
           : HttpProbe.new(url, matcher, proxy.hostname, proxy.port, proxy.user, proxy.password)
-        super(probe, timeout_s, period_s, url)
+        super(probe, timeout_seconds, period_seconds, url)
       end
 
     end
