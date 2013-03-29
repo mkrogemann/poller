@@ -21,8 +21,9 @@ module Poller
 
     def check
       @timeout ||= Timeout.new(@timeout_s) # allow injecting a timeout from within tests
-      @tries = 0
-      @check_started_at = Time.now
+
+      tries = 0
+      check_started_at = Time.now
       last_sample_took = 0
 
       while !@timeout.occured?
@@ -31,12 +32,12 @@ module Poller
         @probe.sample
         satisfied = @probe.satisfied?
         last_sample_took = Time.now - sample_started_at
-        @tries += 1
+        tries += 1
         return if satisfied
       end
 
       raise RuntimeError, "Timeout period has been exceeded for Poller (#{@name})." \
-        + " Poller tried #{@tries} times which in total took #{Time.now - @check_started_at} seconds."
+        + " Poller tried #{tries} times which in total took #{Time.now - check_started_at} seconds."
     end
 
     private
