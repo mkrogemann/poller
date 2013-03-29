@@ -1,10 +1,11 @@
 Changelog
 =========
 
-Version 0.4.0 - unreleased
+Version 0.4.0 - released
 -------------
 
 * Refactoring: Change/simplify sequence of calls inside Poller.check method
+* Reduce sleep time per sample by the time that the previous sampling consumed
 * Make error message on timeout more informative (add total time and number of tries)
 * Add integration tests
 
