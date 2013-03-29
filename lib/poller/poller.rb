@@ -4,7 +4,7 @@
 # raising a RuntimeError in case the Timeout period has been exceeded.
 #
 # Poller expects that the probe object has methods called 'satisfied?'
-# which will return a boolean and 'sample' which triggers taking the
+# which must return a boolean and 'sample' which triggers taking the
 # next sample and has no explicit return value.
 
 require 'poller/timeout'
