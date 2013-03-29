@@ -24,7 +24,7 @@ Or install it directly on your command line
 
 Usage
 -----
-Complementary to this section, there is also a wiki page with more [Usage Examples](https://github.com/mkrogemann/poller/wiki/Usage-Examples).
+Complementary to this section, there is also a [Wiki](https://github.com/mkrogemann/poller/wiki) page with more [Usage Examples](https://github.com/mkrogemann/poller/wiki/Usage-Examples).
 
 Find below an example usage of HttpPoller and an Http Response Matcher
 
