@@ -1,11 +1,12 @@
-# This module handles the generic bits of the poller gem and
-# is intended to be mixed into any concrete Poller implementations.
-# The generic parts include the periodic checking of a Probe and
-# raising a RuntimeError in case the Timeout period has been exceeded.
+# This module handles the generic parts of the poller gem and
+# is intended to be mixed into all concrete Poller implementations.
+#
+# The generic parts include the periodic checking of a Probe and to
+# raise a RuntimeError in case the Timeout period has been exceeded.
 #
 # Poller expects that the probe object has methods called 'satisfied?'
 # which must return a boolean and 'sample' which triggers taking the
-# next sample and has no explicit return value.
+# next sample and which has no explicit return value.
 
 require 'poller/timeout'
 
