@@ -4,23 +4,23 @@
 # raising a RuntimeError in case the timeout period has been exceeded.
 #
 # Poller expects that the probe object has methods called 'satisfied?'
-# that will return a boolean and 'sample' which takes the next sample
-# and has no explicit return value.
+# which will return a boolean and 'sample' which triggers taking the
+# next sample and has no explicit return value.
 
 require 'poller/timeout'
 
 module Poller
   module Poller
 
-    def initialize(probe, timeout_s, period_s, name = nil)
+    def initialize(probe, timeout_seconds, period_seconds, name = nil)
       @probe = probe
-      @timeout_s = timeout_s
-      @period = period_s.to_i
+      @timeout_seconds = timeout_seconds
+      @period = period_seconds.to_f
       @name = name.nil? ? "no name given" : name
     end
 
     def check
-      @timeout ||= Timeout.new(@timeout_s) # allow injecting a timeout from within tests
+      @timeout ||= Timeout.new(@timeout_seconds) # allow injecting a Timeout object from within tests
 
       tries = 0
       check_started_at = Time.now
@@ -41,8 +41,8 @@ module Poller
     end
 
     private
-    def sleep_time(period_i, last_sample_took)
-      st = period_i - last_sample_took
+    def sleep_time(period, last_sample_took)
+      st = period - last_sample_took
       st < 0 ? 0 : st
     end
 
