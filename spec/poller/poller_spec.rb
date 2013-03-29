@@ -3,7 +3,6 @@ require 'poller/poller'
 
 module Poller
 
-
   # we need a class to include the module into so we can test its behaviour
   class PollerModuleHolder
     include Poller
@@ -16,10 +15,10 @@ module Poller
 
   describe Poller do
 
-    let(:timeout) { double('timeout') }
-    let(:probe) { double('probe') }
-
     context '#check' do
+
+      let(:timeout) { double('timeout') }
+      let(:probe) { double('probe') }
 
       it 'succeeds immediately (probe is satisfied on first call)' do
         timeout.stub(:occured?).and_return(false)
@@ -31,7 +30,7 @@ module Poller
         probe.should_receive(:sample).once
 
         # we can set timeout_seconds to nil since Timeout gets mocked
-        poller = PollerModuleHolder.new(probe, nil, 0.1, nil)
+        poller = PollerModuleHolder.new(probe, nil, 0.1)
         poller.instance_variable_set(:@timeout, timeout)
 
         poller.check
@@ -48,7 +47,7 @@ module Poller
         probe.should_receive(:satisfied?).exactly(3).times
 
         # we can set timeout_seconds to nil since Timeout gets mocked
-        poller = PollerModuleHolder.new(probe, nil, 0.1, nil)
+        poller = PollerModuleHolder.new(probe, nil, 0.1)
         poller.instance_variable_set(:@timeout, timeout)
 
         poller.check
@@ -71,6 +70,28 @@ module Poller
         expect {
           poller.check
         }.to raise_error(RuntimeError, /^Timeout period has been exceeded for Poller \(descriptive name here\)\. Poller tried \d times which in total took .* seconds\.$/)
+      end
+
+    end
+
+    context '#sleep_time' do
+
+      it 'returns 0 if computed sleep time is less than zero' do
+        poller = PollerModuleHolder.new(nil, nil, nil)
+
+        poller.send(:sleep_time, 1, 5).should == 0
+      end
+
+      it 'returns 0 if computed sleep time is zero' do
+        poller = PollerModuleHolder.new(nil, nil, nil)
+
+        poller.send(:sleep_time, 1, 1).should == 0
+      end
+
+      it 'returns a positive Numeric if computed sleep time is greater than zero' do
+        poller = PollerModuleHolder.new(nil, nil, nil)
+
+        poller.send(:sleep_time, 5, 1).should == 4
       end
 
     end
