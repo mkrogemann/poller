@@ -1,6 +1,11 @@
 Changelog
 =========
 
+Version 0.4.1 - released 2013-03-30
+-------------
+
+* Bugfix: XPathContainsText matcher did not check if XPath expression returns nil
+
 Version 0.4.0 - released 2013-03-29
 -------------
 
