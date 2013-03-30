@@ -26,6 +26,7 @@ module Matchers
       def matches?(document_s)
         xml_doc = REXML::Document.new(document_s)
         xpath = REXML::XPath.first(xml_doc, @xpath_expr_s)
+        return false if xpath.nil?
         return @search_term.match(xpath.text) if @search_term.class == Regexp
         xpath.text.include?(@search_term)
       end
