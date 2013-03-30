@@ -83,6 +83,16 @@ module Poller
           }.to raise_error(RuntimeError, /^Timeout period has been exceeded for Poller \(http:\/\/www.w3schools.com\/xml\/plant_catalog.xml\)\. Poller tried \d times which in total took \d\.?\d* seconds\.$/)
         end
 
+        # make sure non-existing nodes do not trigger any problems
+        it 'eventually runs into timeout when looking for non-existing text node', :type => 'integration' do
+          matcher = Matchers::XML::XPathContainsText.new('/CATALOG/SCHELLACK/TITLE', 'Empire Burlesque')
+          poller = HttpPoller.new("http://www.w3schools.com/xml/cd_catalog.xml", matcher, 5.0, 1.0)
+
+          expect {
+            poller.check
+          }.to raise_error(RuntimeError, /^Timeout period has been exceeded for Poller \(http:\/\/www.w3schools.com\/xml\/cd_catalog.xml\)\. Poller tried \d times which in total took \d\.?\d* seconds\.$/)
+        end
+
       end
 
     end
