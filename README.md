@@ -72,6 +72,6 @@ The gem has been developed to run in Ruby 1.9.3 and is being continuously integr
 
 One design goal has been to work without external dependencies. Therefore, it does not make use of gems such as the fabulous [rest-client](https://github.com/rest-client/rest-client). Proxy support has been built on top of the less comfortable net/http API.
 
-Extensions that require additional gems should be implemented as gems of their own. This way, users don't have to pull in any dependencies they don't really need (e.g. AMQP).
+Extensions that require additional gems should be implemented as gems of their own. This way, users don't have to pull in any dependencies they don't really need (e.g. AMQP, JSON, ...).
 
 Proxy configuration is done by passing in the proxy information in an OpenStruct instance or alternatively as a Hash (see Usage). Proxies requiring authentication are supported.
