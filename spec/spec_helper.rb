@@ -1,14 +1,13 @@
-require 'xml_helpers'
-
 if ENV['COVERAGE'] == 'true'
   require 'simplecov'
-  SimpleCov.start do
-    add_filter "/spec/"
-  end
 end
 
-require 'coveralls'
-Coveralls.wear!
+if ENV['TRAVIS'] == 'true'
+  require 'coveralls'
+  Coveralls.wear!
+end
+
+require 'xml_helpers'
 
 RSpec.configure do |config|
   config.treat_symbols_as_metadata_keys_with_true_values = true
