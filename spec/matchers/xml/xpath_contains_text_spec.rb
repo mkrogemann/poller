@@ -26,6 +26,16 @@ module Matchers
             xct.matches?(simple_valid_xml).should be_false
           end
         end
+
+        context 'invalid XML' do
+          it 'foo' do
+            xct = XPathContainsText.new('//C/B', /ump/)
+            invalid_xml = simple_valid_xml[0..-3]
+            expect {
+              xct.matches?(invalid_xml)
+            }.to raise_error REXML::ParseException
+          end
+        end
       end
     end
   end

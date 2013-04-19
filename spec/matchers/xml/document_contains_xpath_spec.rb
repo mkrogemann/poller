@@ -24,6 +24,16 @@ module Matchers
             dcx.matches?(two_agents_xml).should be_false
           end
         end
+
+        context 'invalid XML' do
+          it 'raises a REXML::ParseException for invalid XML' do
+            dcx = DocumentContainsXPath.new('/Agents/Agent', 3)
+            invalid_xml = two_agents_xml[0..-3]
+            expect {
+              dcx.matches?(invalid_xml)
+            }.to raise_error REXML::ParseException
+          end
+        end
       end
     end
   end
