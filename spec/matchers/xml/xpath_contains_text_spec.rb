@@ -28,7 +28,7 @@ module Matchers
         end
 
         context 'invalid XML' do
-          it 'foo' do
+          it 'raises a REXML::ParseException for invalid XML' do
             xct = XPathContainsText.new('//C/B', /ump/)
             invalid_xml = simple_valid_xml[0..-3]
             expect {
