@@ -12,6 +12,8 @@ poller is a Ruby gem that supports integration testing of systems that contain c
 
 It is in large parts inspired by the work of Steeve Freeman &amp; Nat Pryce and their excellent GOOS book ("Growing Object Oriented Software Guided By Tests").
 
+If you are specifically interested in a poller implementation that can handle JSON, please continue reading and then have a look at [poller-json](https://github.com/mkrogemann/poller-json).
+
 Installation
 ------------
 The gem can be installed in the usual ways. Either let bundler take care of it and add to your Gemfile like this:
