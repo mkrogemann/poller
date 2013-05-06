@@ -1,6 +1,11 @@
 Changelog
 =========
 
+Version 0.4.2 - unreleased
+-------------
+
+* Adjust tests to new iana.org site layout and clean up test wording/formatting
+
 Version 0.4.1 - released 2013-03-30
 -------------
 
