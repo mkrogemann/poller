@@ -9,4 +9,5 @@ bundle
 [ -d "rspec-integration" ] || mkdir rspec-integration
 bundle exec rspec --tag type:integration --out rspec-integration/rspec.xml --format html --out rspec-integration/index.html
 
+echo `date +%s` > lastbuild.epoch
 exit $?
