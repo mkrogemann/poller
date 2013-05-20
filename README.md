@@ -76,4 +76,4 @@ One design goal has been to work without external dependencies. Therefore, it do
 
 Extensions that require additional gems should be implemented as gems of their own. This way, users don't have to pull in any dependencies they don't really need (e.g. AMQP, JSON, ...).
 
-Proxy configuration is done by passing in the proxy information in an OpenStruct instance or alternatively as a Hash (see Usage). Proxies requiring authentication are supported.
+Proxy configuration is done by passing in the proxy information in an OpenStruct instance or alternatively as a Hash (see [Usage](https://github.com/mkrogemann/poller#usage)). Proxies requiring authentication are supported.
