@@ -19,13 +19,13 @@ Installation
 The gem can be installed in the usual ways. Either let bundler take care of it and add to your Gemfile like this:
 
 ```ruby
-    gem 'poller'
+gem 'poller'
 ```
 
 Or install it directly on your command line
 
 ```sh
-    gem install poller
+gem install poller
 ```
 
 Usage
@@ -35,15 +35,15 @@ Complementary to this section, there is also a [Wiki](https://github.com/mkrogem
 Find below an example usage of HttpPoller and an Http Response Matcher
 
 ```ruby
-    require 'poller'
+require 'poller'
 
-    matcher = Matchers::HTTP::ResponseBodyContains.new(/your regex/)
-    #  alternatively pass in a String
+matcher = Matchers::HTTP::ResponseBodyContains.new(/your regex/)
+#  alternatively pass in a String
 
-    poller = Poller::HTTP::HttpPoller.new("http://your.sut.example.com", matcher, 5.0, 1.0)
-    #  timeout 5s, poll every 1s
+poller = Poller::HTTP::HttpPoller.new("http://your.sut.example.com", matcher, 5.0, 1.0)
+#  timeout 5s, poll every 1s
 
-    poller.check
+poller.check
 ```
 
 The above code will either terminate happily and return nil as soon as the expected result is found in the http response body. The matcher passed into the Poller's constructor is used to determine whether the result matches the expectation.
@@ -57,15 +57,15 @@ Or, in the unhappy case, the call will eventually run into a Timeout resulting i
 In case you have to use a Proxy to reach the system under test, use this syntax:
 
 ```ruby
-    proxy = { :hostname => 'proxy.internal.example.com', :port => 8080, :user => 'user', :password => '_secret' }
+proxy = { :hostname => 'proxy.internal.example.com', :port => 8080, :user => 'user', :password => '_secret' }
 
-    poller = Poller::HTTP::HttpPoller.new("http://your.sut.example.com", matcher, 5.0, 1.0, proxy)
+poller = Poller::HTTP::HttpPoller.new("http://your.sut.example.com", matcher, 5.0, 1.0, proxy)
 ```
 
 In case you need to authenticate against the resource you are polling add user:password to the URL like so:
 
 ```ruby
-    poller = Poller::HTTP::HttpPoller.new("http://user:password@your.sut.example.com", matcher, 5.0, 1.0, proxy)
+poller = Poller::HTTP::HttpPoller.new("http://user:password@your.sut.example.com", matcher, 5.0, 1.0, proxy)
 ```
 
 SSL is supported but certificates will not be verified, so using invalid certificates (which is a common thing to do, right?) will not raise an exception.
