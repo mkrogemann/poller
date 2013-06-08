@@ -6,4 +6,6 @@
 /*.gem
 .DS_Store
 /.rvmrc
+/.ruby-gemset
+/.ruby-version
 /lastbuild.epoch
