@@ -5,7 +5,7 @@ module Poller
   module HTTP
 
     describe HttpProbe do
-      context '#initialize' do
+      describe '#initialize' do
 
         it 'accepts a URL given as a String and converts it to a URI' do
           http_probe = HttpProbe.new('http://example.com/resource?id=1&token=asldfhljdhru74', nil)
@@ -37,7 +37,7 @@ module Poller
       end
 
 
-      context '#sample' do
+      describe '#sample' do
 
         let(:http_proxy) { double('http_proxy') }
         let(:http_response) { double('http_response') }
@@ -109,7 +109,7 @@ module Poller
       end
 
 
-      context '#satisfied?' do
+      describe '#satisfied?' do
 
         let(:matcher) { double('matcher') }
         let(:http_response) { double('http_response') }

@@ -15,7 +15,7 @@ module Poller
 
   describe Poller do
 
-    context '#check' do
+    describe '#check' do
 
       let(:timeout) { double('timeout') }
       let(:probe) { double('probe') }
@@ -74,7 +74,7 @@ module Poller
 
     end
 
-    context '#sleep_time' do
+    describe '#sleep_time' do
 
       it 'returns 0 if computed sleep time is less than zero' do
         poller = PollerModuleHolder.new(nil, nil, nil)
