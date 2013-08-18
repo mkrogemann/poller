@@ -45,7 +45,7 @@ module Poller
           require 'matchers/http/response_body_contains'
           it 'succeeds in fetching and matching an http response from example.com', :type => 'integration' do
             matcher = Matchers::HTTP::ResponseBodyContains.new('<title>Example Domain</title>')
-            poller = HttpPoller.new("http://example.iana.org", matcher, 5.0, 1.0)
+            poller = HttpPoller.new("http://example.com", matcher, 5.0, 1.0)
             poller.check.should be_nil
           end
         end
