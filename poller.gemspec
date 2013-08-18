@@ -14,6 +14,6 @@ Gem::Specification.new do |gem|
   gem.name          = "poller"
   gem.require_paths = ["lib"]
   gem.version       = Poller::VERSION
-  gem.add_development_dependency('rspec', '~> 2.13.0')
+  gem.add_development_dependency('rspec', '~> 2.14.1')
   gem.add_development_dependency('simplecov', '~> 0.7.1')
 end
