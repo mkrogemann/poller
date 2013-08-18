@@ -1,10 +1,12 @@
 Changelog
 =========
 
-Version 0.4.2 - unreleased
+Version 0.4.2 - released 2013-08-18
 -------------
 
 * Adjust tests to new iana.org site layout and clean up test wording/formatting
+* And switching back to example.com as example.iana.org no longer resolves
+* Use github code highlighting feature in README
 
 Version 0.4.1 - released 2013-03-30
 -------------
