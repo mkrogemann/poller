@@ -30,11 +30,11 @@ module Poller
       while !@timeout.occured?
         Kernel.sleep sleep_time(@period, last_sample_took)
         sample_started_at = Time.now
-        @probe.sample
+        response = @probe.sample
         satisfied = @probe.satisfied?
         last_sample_took = Time.now - sample_started_at
         tries += 1
-        return if satisfied
+        return [response, Time.now - sample_started_at] if satisfied
       end
 
       raise RuntimeError, "Timeout period has been exceeded for Poller (#{@name})." \

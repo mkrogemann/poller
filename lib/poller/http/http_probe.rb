@@ -45,7 +45,7 @@ module Poller
             request.basic_auth(@uri.user, @uri.password)
           end
           @http_response = @proxy.request(request)
-          return if @http_response.class == Net::HTTPOK
+          return @http_response if @http_response.class == Net::HTTPOK
         rescue Exception => e
           raise RuntimeError, "#sample caught an Exception of class #{e.class} with message: #{e.message}"
         end

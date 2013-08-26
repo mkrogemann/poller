@@ -1,6 +1,11 @@
 Changelog
 =========
 
+Version 0.5.0 - released 2013-08-26
+-------------
+
+* API change: Poller now returns a tuple containing the http response and the elapsed time. Clients can still ignore the result and rely on the fact that a failing poller.check will raise an error once the timeout occurs, so no immediate changes are required.
+
 Version 0.4.2 - released 2013-08-18
 -------------
 
