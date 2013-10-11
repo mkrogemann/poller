@@ -8,10 +8,9 @@ module Poller
       @start_time = Time.now
     end
 
-    # Returns true if timeout period has elapsed, false if not
+    # Returns true if timeout period has elapsed
     def occured?
       Time.now - @start_time >= @period
     end
-
   end
 end
