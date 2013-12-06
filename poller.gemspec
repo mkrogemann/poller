@@ -17,6 +17,7 @@ Gem::Specification.new do |gem|
 
   if defined?(RUBY_ENGINE) && RUBY_ENGINE == 'rbx'
     gem.add_runtime_dependency('rubysl', '~> 2.0')
+    gem.add_runtime_dependency('rubysl-json', '~> 2.0.2')
     gem.add_runtime_dependency('rubinius-coverage', '~> 2.0.3')
   end
   gem.add_development_dependency('rspec', '~> 2.14.1')
