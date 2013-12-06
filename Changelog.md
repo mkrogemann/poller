@@ -1,6 +1,12 @@
 Changelog
 =========
 
+Version 0.5.1 - released 2013-12-07
+-------------
+
+* Adjust to make it work with recent versions of Rubinius.
+* Update dev dependencies
+
 Version 0.5.0 - released 2013-08-26
 -------------
 
