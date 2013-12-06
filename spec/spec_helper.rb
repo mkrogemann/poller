@@ -1,8 +1,8 @@
-if ENV['COVERAGE'] == 'true'
+if ENV['COVERAGE'] == 'true' && RUBY_VERSION != '1.8.7'
   require 'simplecov'
 end
 
-if ENV['TRAVIS'] == 'true'
+if ENV['TRAVIS'] == 'true' && RUBY_VERSION != '1.8.7'
   require 'coveralls'
   Coveralls.wear!
 end
