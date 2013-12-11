@@ -4,7 +4,7 @@
 
 rvm use 1.9.3@mkrogemann-poller --create --fuzzy
 
-bundle
+bundle update
 
 [ -d "rspec-integration" ] || mkdir rspec-integration
 bundle exec rspec --tag type:integration --out rspec-integration/rspec.xml --format html --out rspec-integration/index.html
