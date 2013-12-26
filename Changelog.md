@@ -1,6 +1,12 @@
 Changelog
 =========
 
+Version 0.5.2 - released 2013-12-26
+-------------
+
+* Drop support for Rubinius, remove rbx from .travis.yml
+* Add support for MRI 2.1.0
+
 Version 0.5.1 - released 2013-12-07
 -------------
 

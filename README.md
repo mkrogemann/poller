@@ -81,7 +81,7 @@ Pull requests and bug reports are welcome!
 
 Design
 ------
-The gem has been developed to run in Ruby 1.9.3 and is being continuously integrated in Ruby 2.0.0, 1.9.3 and 1.8.7.
+The gem has been developed to run in Ruby 1.9.3 and is being continuously integrated in (MRI) 2.1.0, 2.0.0, 1.9.3 and 1.8.7.
 
 One design goal has been to work without external dependencies. Therefore, it does not make use of gems such as the fabulous [rest-client](https://github.com/rest-client/rest-client). Proxy support has been built on top of the less comfortable net/http API.
 
