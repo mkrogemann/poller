@@ -9,19 +9,19 @@ module Matchers
         context 'the document contains what we look for' do
           it 'true if given XPath is contained at least once within the XML' do
             dcx = DocumentContainsXPath.new('/Agents')
-            dcx.matches?(two_agents_xml).should be_true
+            expect(dcx.matches?(two_agents_xml)).to be_truthy
           end
 
           it 'true if given XPath contained at least given number of times within the XML' do
             dcx = DocumentContainsXPath.new('/Agents/Agent', 2)
-            dcx.matches?(two_agents_xml).should be_true
+            expect(dcx.matches?(two_agents_xml)).to be_truthy
           end
         end
 
         context 'the document does not contain what we look for' do
           it 'false if given XPath is contained fewer times than specified' do
             dcx = DocumentContainsXPath.new('/Agents/Agent', 3)
-            dcx.matches?(two_agents_xml).should be_false
+            expect(dcx.matches?(two_agents_xml)).to be_falsey
           end
         end
 

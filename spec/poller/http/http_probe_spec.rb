@@ -3,7 +3,6 @@ require 'poller/http/http_probe'
 
 module Poller
   module HTTP
-
     describe HttpProbe do
       describe '#initialize' do
 
@@ -36,9 +35,7 @@ module Poller
 
       end
 
-
       describe '#sample' do
-
         let(:http_proxy) { double('http_proxy') }
         let(:http_response) { double('http_response') }
         let(:http_request) { double('http_request') }
@@ -108,9 +105,7 @@ module Poller
 
       end
 
-
       describe '#satisfied?' do
-
         let(:matcher) { double('matcher') }
         let(:http_response) { double('http_response') }
 
@@ -123,12 +118,9 @@ module Poller
 
           matcher.should_receive(:matches?).once.and_return(true)
 
-          http_probe.satisfied?.should be_true
+          expect(http_probe.satisfied?).to be_truthy
         end
-
       end
-
     end
-
   end
 end
