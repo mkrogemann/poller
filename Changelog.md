@@ -1,6 +1,13 @@
 Changelog
 =========
 
+Version 0.5.3 - released 2014-12-27
+-------------
+
+* Update development dependencies
+* Use new RSpec 3 syntax
+* Add support for MRI 2.2.0 (README and .travis.yml)
+
 Version 0.5.2 - released 2013-12-26
 -------------
 
