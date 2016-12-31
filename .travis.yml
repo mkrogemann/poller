@@ -8,5 +8,4 @@ rvm:
   - 2.2.0
   - 2.3.3
   - 2.4.0
-  - jruby-19mode
 script: bundle exec rspec spec
