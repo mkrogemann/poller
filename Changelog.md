@@ -1,6 +1,14 @@
 Changelog
 =========
 
+Version 0.6.0 - released 2018-09-08
+-------------
+
+* Add support for MRI 2.5 (README and .travis.yml)
+* Fix some rubocop findings
+* Adjust specs to use https for w3schools links
+* No longer support MRI 1.8.7. Sorry folks, it gets too difficult to support. Please use MRI >= 2.0.x
+
 Version 0.5.3 - released 2014-12-27
 -------------
 

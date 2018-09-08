@@ -82,7 +82,7 @@ Design
 ------
 The gem was originally developed in MRI Ruby 1.9.3 and should still work for 1.9.x as well as for 1.8.7, but see next paragraph for caveats regarding old versions of MRI Ruby.
 
-Travis tests are configured to run for MRI versions 2.5.x, 2.4.x, 2.3.x, 2.2.x, 2.1.x and 2.0.x. It has turned out to be too difficult to support any 1.x versions, sorry folks, please update to more recent versions.
+Travis tests are configured to run for MRI versions 2.5.x, 2.4.x, 2.3.x, 2.2.x, 2.1.x and 2.0.x. It has turned out to be too difficult to support any 1.x versions, both locally and on Travis CI. Sorry folks, please update to more recent versions.
 
 One design goal has been to work without external dependencies. Therefore, it does not make use of gems such as the fabulous [rest-client](https://github.com/rest-client/rest-client). Proxy support has been built on top of the less comfortable net/http API.
 
