@@ -45,7 +45,7 @@ module Poller
           require 'matchers/http/response_body_contains'
           it 'succeeds in fetching and matching an http response from example.com', :type => 'integration' do
             matcher = Matchers::HTTP::ResponseBodyContains.new('<title>Example Domain</title>')
-            poller = HttpPoller.new("http://example.com", matcher, 5.0, 1.0)
+            poller = HttpPoller.new('http://example.com', matcher, 5.0, 1.0)
             result = poller.check
             result.should be_an_instance_of Array
             result[0].should be_an_instance_of Net::HTTPOK
@@ -57,7 +57,7 @@ module Poller
           require 'matchers/xml/xpath_contains_text'
           it 'succeeds in fetching an XML document and in finding a text for given XPath', :type => 'integration' do
             matcher = Matchers::XML::XPathContainsText.new('/CATALOG/CD/TITLE', 'Empire Burlesque')
-            poller = HttpPoller.new("https://www.w3schools.com/xml/cd_catalog.xml", matcher, 5.0, 1.0)
+            poller = HttpPoller.new('https://www.w3schools.com/xml/cd_catalog.xml', matcher, 5.0, 1.0)
             result = poller.check
             result.should be_an_instance_of Array
             result[0].should be_an_instance_of Net::HTTPOK
@@ -67,7 +67,7 @@ module Poller
           # make sure non-existing nodes do not trigger any problems
           it 'eventually runs into timeout when looking for non-existing text node', :type => 'integration' do
             matcher = Matchers::XML::XPathContainsText.new('/CATALOG/SCHELLACK/TITLE', 'Empire Burlesque')
-            poller = HttpPoller.new("https://www.w3schools.com/xml/cd_catalog.xml", matcher, 5.0, 1.0)
+            poller = HttpPoller.new('https://www.w3schools.com/xml/cd_catalog.xml', matcher, 5.0, 1.0)
             expect {
               poller.check
             }.to raise_error(RuntimeError, /^Timeout period has been exceeded for Poller \(https:\/\/www.w3schools.com\/xml\/cd_catalog.xml\)\. Poller tried \d times which in total took \d\.?\d* seconds\.$/)
@@ -78,7 +78,7 @@ module Poller
           require 'matchers/xml/document_contains_xpath'
           it 'succeeds in fetching an XML document and in finding a given XPath at least given number of times', :type => 'integration' do
             matcher = Matchers::XML::DocumentContainsXPath.new('/CATALOG/CD/ARTIST', 11)
-            poller = HttpPoller.new("https://www.w3schools.com/xml/cd_catalog.xml", matcher, 5.0, 1.0)
+            poller = HttpPoller.new('https://www.w3schools.com/xml/cd_catalog.xml', matcher, 5.0, 1.0)
             result = poller.check
             result.should be_an_instance_of Array
             result[0].should be_an_instance_of Net::HTTPOK
@@ -88,7 +88,7 @@ module Poller
           # have a failing test to validate error message
           it 'fails to find a given XPath in document', :type => 'integration' do
             matcher = Matchers::XML::DocumentContainsXPath.new('/CATALOG/NOT_THERE/LIGHT', 11)
-            poller = HttpPoller.new("https://www.w3schools.com/xml/plant_catalog.xml", matcher, 5.0, 1.0)
+            poller = HttpPoller.new('https://www.w3schools.com/xml/plant_catalog.xml', matcher, 5.0, 1.0)
             expect {
               poller.check
             }.to raise_error(RuntimeError, /^Timeout period has been exceeded for Poller \(https:\/\/www.w3schools.com\/xml\/plant_catalog.xml\)\. Poller tried \d times which in total took \d\.?\d* seconds\.$/)
@@ -98,4 +98,3 @@ module Poller
     end
   end
 end
-
