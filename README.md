@@ -5,7 +5,6 @@ poller
 [![Build Status](https://travis-ci.org/mkrogemann/poller.png)](https://travis-ci.org/mkrogemann/poller)
 [![Code Climate](https://codeclimate.com/github/mkrogemann/poller.png)](https://codeclimate.com/github/mkrogemann/poller)
 [![Coverage Status](https://coveralls.io/repos/mkrogemann/poller/badge.png?branch=master)](https://coveralls.io/r/mkrogemann/poller)
-[![Dependency Status](https://gemnasium.com/mkrogemann/poller.png)](https://gemnasium.com/mkrogemann/poller)
 [![Gem Version](https://badge.fury.io/rb/poller.png)](http://badge.fury.io/rb/poller)
 
 poller is a Ruby gem that supports integration testing of systems that contain calls to asynchronous components (eg Splunk, Search Servers, ...) by exposing Pollers, Probes and Matchers.
@@ -83,7 +82,7 @@ Design
 ------
 The gem was originally developed in MRI Ruby 1.9.3
 
-Travis tests are configured to run for MRI versions 2.4.0, 2.3.3, 2.2.0, 2.1.5, 2.0.0 and 1.8.7.
+Travis tests are configured to run for MRI versions 2.5.x, 2.4.x, 2.3.x, 2.2.x, 2.1.x, 2.0.x and 1.8.7.
 
 One design goal has been to work without external dependencies. Therefore, it does not make use of gems such as the fabulous [rest-client](https://github.com/rest-client/rest-client). Proxy support has been built on top of the less comfortable net/http API.
 
